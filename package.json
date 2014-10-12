@@ -1,0 +1,35 @@
+{
+  "name": "mongoose-promised",
+  "description": "Mongoose with Q promise support",
+  "version": "0.1.0",
+  "homepage": "https://github.com/davideicardi/mongoose-promised",
+  "author": {
+    "name": "Davide Icardi",
+    "email": "davide.icardi@gmail.com"
+  },
+  "keywords": [
+    "mongoose",
+    "promise",
+    "q"
+  ],
+  "license": "MIT",
+  "repository" : { 
+    "type" : "git", 
+    "url" : "https://github.com/davideicardi/mongoose-promised.git"
+  },
+
+  "dependencies": {
+    "q": "1.0.1",
+    "mongoose": "3.8.16"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "chai": "^1.9.2",
+    "chai-as-promised": "^4.1.1"
+  },
+
+  "scripts": {
+    "mongod": "mongod --dbpath=data --nojournal",
+    "test": "./node_modules/mocha/bin/mocha ./test/"
+  }
+}
