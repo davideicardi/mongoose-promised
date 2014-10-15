@@ -21,6 +21,10 @@ describe("mongoose-promised", function() {
 		return mongoose.connectQ(mongoUrl);
 	});
 
+	it("Should clear the collection", function(){
+		return CustomerModel.where().removeQ();
+	});
+
 	it("Should add a document", function() {
 
 		var model = new CustomerModel({
@@ -44,6 +48,28 @@ describe("mongoose-promised", function() {
 		  	.findQ();
 
 		return expect(results).to.eventually.have.property("length", 1);
+	});
+
+	it("Should findOne document", function() {
+
+	  	var result = CustomerModel
+		  	.where({email : "davide.icardi@gmail.com"})
+		  	.findOneQ();
+
+		return Q.all([
+			expect(result).to.eventually.have.property("_id"),
+			expect(result).to.eventually.have.property("firstName", "Davide"),
+			expect(result).to.eventually.have.property("email", "davide.icardi@gmail.com")
+			]);
+	});
+
+	it("Should calculate count", function() {
+
+	  	var result = CustomerModel
+		  	.where()
+		  	.countQ();
+
+		return expect(result).to.eventually.equal(1);
 	});
 
 	it("Should remove a document", function() {

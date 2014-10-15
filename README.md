@@ -1,6 +1,40 @@
 # mongoose-promised
 
-Mongoose with Q promise support
+[Mongoose][mongoose] with [Q promise][q] support.
+
+## Getting started
+
+	// reference mongoose-promised
+	var mongoose = require('mongoose-promised');
+
+	// create a sample customer schema and model
+	var Schema = mongoose.Schema;
+	var customerSchema = new Schema({
+			email: { type: String, required: true },
+			firstName: { type: String, required: true },
+			lastName: { type: String, required: true },
+			address: { type: String, required: false }
+		});
+	customerSchema.index({ email: 1 }, { name: 'key', unique: true });
+	var CustomerModel = mongoose.model("Customer", customerSchema, "customers");	
+
+	// connect to mongodb
+	var connected = mongoose.connectQ("mongodb://localhost:27017/database-name");
+
+	connected.then(function(){
+		var model = new CustomerModel({
+			email:"davide.icardi@gmail.com",
+			firstName:"Davide",
+			lastName:"Icardi"
+		});
+
+		var customer = model.saveQ()
+			.spread(function (document, numberAffected){
+				return document;
+			});
+	});
+
+
 
 ## License
 
@@ -26,3 +60,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+
+
+[mongoose]: http://mongoosejs.com/
+[q]: https://github.com/kriskowal/q
+[mongoose-q]: https://github.com/iolo/mongoose-q
