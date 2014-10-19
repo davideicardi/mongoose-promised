@@ -1,4 +1,4 @@
-var mongoose = require('./../index.js'); // require('mongoose-promised')
+var mongoose = require('./../mongoose-promised.js'); // require('mongoose-promised')
 mongoose.connect("mongodb://localhost:27017/mongoose-promised-test");
 
 var Cat = mongoose.model('Cat', { name: String });

@@ -18,6 +18,8 @@
     "url" : "https://github.com/davideicardi/mongoose-promised.git"
   },
 
+  "main": "./mongoose-promised.js",
+
   "dependencies": {
     "q": "1.0.1",
     "mongoose": "3.8.16"

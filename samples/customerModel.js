@@ -1,6 +1,6 @@
 "use strict";
 
-var mongoose = require('./../index.js'); // require('mongoose-promised')
+var mongoose = require('./../mongoose-promised.js'); // require('mongoose-promised')
 
 var Schema = mongoose.Schema;
 

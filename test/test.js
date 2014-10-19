@@ -10,7 +10,7 @@ chai.use(chaiAsPromised);
 var expect = chai.expect;
 var Q = require("q");
 
-var mongoose = require("./../index.js"); // require('mongoose-promised')
+var mongoose = require("./../mongoose-promised.js");
 var CustomerModel = require("./../samples/customerModel.js");
 
 describe("mongoose-promised", function() {
