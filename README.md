@@ -2,7 +2,7 @@
 
 [Mongoose][mongoose] with [Q promise][q] support.
 
-For example consder the following [Mongoose][mongoose] code:
+For example consider the following [Mongoose][mongoose] code:
 
 	var mongoose = require('mongoose');
 	mongoose.connect("mongodb://localhost/test");
@@ -55,6 +55,8 @@ In this case the returned promise returns an array of 2 elements with `document`
 		.spread(function (document, numberAffected){
 			return document;
 		});
+
+See [Mongoose API documentation](http://mongoosejs.com/docs/api.html) for information about callback and to understand what kind of promise is available.
 
 ## Connect to mongo database
 
