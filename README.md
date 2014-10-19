@@ -2,7 +2,87 @@
 
 [Mongoose][mongoose] with [Q promise][q] support.
 
-## Getting started
+For example consder the following [Mongoose][mongoose] code:
+
+	var mongoose = require('mongoose');
+	mongoose.connect("mongodb://localhost/test");
+
+	var Cat = mongoose.model('Cat', { name: String });
+	var kitty = new Cat({ name: 'Zildjian' });
+
+	kitty.save(function (err) {
+	  if (err){
+	  	console.log(err);
+	  }
+
+	  console.log('meow');
+	});
+
+Instead of calling the default mongoose `save` method you can call mongoose-promised `saveQ` method that returns a [Q promise][q] :
+
+	var mongoose = require('mongoose-promised')
+	mongoose.connect("mongodb://localhost/test");
+
+	var Cat = mongoose.model('Cat', { name: String });
+	var kitty = new Cat({ name: 'Zildjian' });
+
+	kitty.saveQ()
+		.then(function(){
+			console.log('meow');
+		})
+		.fail(function (err) {
+			console.log(err);
+	  });
+
+
+## Callback to promise
+
+For each [Mongoose][mongoose] async methods that returns a callback *mongoose-promised* creates an equivalent method with the Q suffix (like saveQ, findQ, ...) that using `Q.npost` returns the corresponding promise. See [Q promise][q] for more info about `npost`.
+
+Usually a callback with the following signature `function (err, result)` is converted into a promise that when resolved returns the result. For example 
+
+	var cat = Cat
+		.where({name: 'Zildjian'})
+		.findOneQ();
+
+`cat` variable is a promise that when resolved will contain the actual cat document.
+
+*NOTE*: Some mongoose callbacks have a different signature, with multiple arguments. For example the `save` method has the following callback signature `function (err, document, numberAffected)`.
+In this case the returned promise returns an array of 2 elements with `document` and `numberAffected`. Usually in these cases you can use the `Q.spread` method that convert the array into arguments:
+
+	var kitty = new Cat({ name: 'Zildjian' });
+	var cat = kitty.saveQ()
+		.spread(function (document, numberAffected){
+			return document;
+		});
+
+## Connect to mongo database
+
+A special case of asynchronous method is a the `connect` method. Usually with mongoose you don't have to wait that the connection is ready. You can simply call the `connect` method and then at the first access if the connection is still not ready the operation will automatically wait. Otherwise you should use the `mongoose.connection.on/once` method. For a better consistency I have also added a `connectQ` method that like any other async method returns a promise resolved when the connection is ready.
+
+	var connected = mongoose.connectQ("mongodb://localhost/database-name");
+
+	connected.then(function(){
+			// connection is ready
+		});
+
+## Available converted methods
+
+Currently the following async methods are available:
+
+- mongoose.Query.prototype.findQ
+- mongoose.Query.prototype.findOneQ
+- mongoose.Query.prototype.countQ
+- mongoose.Query.prototype.removeQ
+
+- mongoose.Model.prototype.saveQ
+- mongoose.Model.prototype.removeQ
+
+Other methods can be easily added and will be available soon.
+
+## Full example
+
+Here a complete example
 
 	// reference mongoose-promised
 	var mongoose = require('mongoose-promised');
@@ -12,8 +92,7 @@
 	var customerSchema = new Schema({
 			email: { type: String, required: true },
 			firstName: { type: String, required: true },
-			lastName: { type: String, required: true },
-			address: { type: String, required: false }
+			lastName: { type: String, required: true }
 		});
 	customerSchema.index({ email: 1 }, { name: 'key', unique: true });
 	var CustomerModel = mongoose.model("Customer", customerSchema, "customers");	
