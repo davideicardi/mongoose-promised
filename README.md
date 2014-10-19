@@ -68,17 +68,21 @@ A special case of asynchronous method is a the `connect` method. Usually with mo
 			// connection is ready
 		});
 
-## Available converted methods
+## Converted methods
 
 Currently the following async methods are available:
 
-- mongoose.Query.prototype.findQ
-- mongoose.Query.prototype.findOneQ
-- mongoose.Query.prototype.countQ
-- mongoose.Query.prototype.removeQ
+mongoose.Query.prototype:
 
-- mongoose.Model.prototype.saveQ
-- mongoose.Model.prototype.removeQ
+- findQ
+- findOneQ
+- countQ
+- removeQ
+
+mongoose.Model.prototype
+
+- saveQ
+- removeQ
 
 Other methods can be easily added and will be available soon.
 
