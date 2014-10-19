@@ -34,6 +34,13 @@ Instead of calling the default mongoose `save` method you can call mongoose-prom
 			console.log(err);
 	  });
 
+## Installation
+
+mongoose-promised is published as a npm package. Can be installed using:
+
+	npm install mongoose-promised
+
+See also [mongoose-promised on npm](https://www.npmjs.org/package/mongoose-promised).
 
 ## Callback to promise
 
