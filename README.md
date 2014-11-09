@@ -127,6 +127,10 @@ Here a complete example
 	});
 
 
+## Other resources or similar projects
+
+Another library to use mongoose and Q is [iolo/mongoose-q](https://github.com/iolo/mongoose-q). It is more mature and has more supported methods. I have decided to write mongoose-promised because I prefer to use the native Q conversion method (`Q.npost`), to have more control on the method mapping and to understand better what's happen under the hood.
+
 
 ## License
 
