@@ -1,5 +1,7 @@
 # mongoose-promised
 
+[![npm version](https://badge.fury.io/js/mongoose-promised.svg)](http://badge.fury.io/js/mongoose-promised)
+
 [Mongoose][mongoose], an elegant mongodb object modeling for node.js, actually expose all its async features  with node.js style callbacks. `mongoose-promised` allows to use [Q promises][q] instead of callbacks.
 
 For example consider the following [Mongoose][mongoose] code:
