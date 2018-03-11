@@ -1,3 +1,5 @@
+# IMPORTANT: Now mongoose has built-in support for ES6 Promise, so this project is no more useful
+
 # mongoose-promised
 
 [![npm version](https://badge.fury.io/js/mongoose-promised.svg)](http://badge.fury.io/js/mongoose-promised)
